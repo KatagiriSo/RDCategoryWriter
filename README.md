@@ -1,10 +1,10 @@
-# RDCategoryWriteraa
+# RDCategoryWriter
 It is a program to transform Diagram used in Categorical Theory to LaTex (xymatrix) using Swift.
 
 ```swift
 let maxsize = (4,4)
 var matrix:[String:(Int,Int)] = [:]
-aaaaa
+
 // element
 ["A","B","C","D"].enumerated().forEach {
   matrix[$0.1] = ($0.0,0)
@@ -24,5 +24,15 @@ let arrows = abcdArrows + others
 
 display(matrix:matrix, matrixsize:maxsize, arrows:arrows)
 
+```
+
+# Output
+```latex
+\xymatrix{
+A \ar[r]^{f} \ar[rrrddd]^{z0}  & B \ar[r]^{g} \ar[rrddd]^{z1}  & C \ar[r]^{h} \ar[rddd]^{z2}  & D \ar[ddd]^{z3}  \\
+&    &    &    \\
+&    &    &    \\
+&    &    & E
+}
 ```
 
