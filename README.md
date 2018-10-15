@@ -2,37 +2,27 @@
 It is a program to transform Diagram used in Categorical Theory to LaTex (xymatrix) using Swift.
 
 ```swift
-let maxsize = (4,4)
-var matrix:[String:(Int,Int)] = [:]
+func sample() {
+    let a = CObject("a")
+    let b = CObject("b")
+    let c = CObject("c")
+    let d = CObject("d")
 
-// element
-["A","B","C","D"].enumerated().forEach {
-  matrix[$0.1] = ($0.0,0)
+    a.addRight(b).setArrow("f").addDown(d).setArrow("g")
+    a.addDown(c).setArrow("h").addRight(d).setArrow("k")
+    
+    let cat = Category(objects:[a,b,c,d])
+    let mat = matrix(cat)
+    display(matrix:mat.matrix, matrixsize:mat.maxsize, arrows:mat.arrows)
 }
 
-// arrows
-let abcds = [["A","B","f"],["B","C","g"],["C","D","h"]]
-let abcdArrows = abcds.map { Arrow($0) }
-
-// E
-matrix["E"] = (3,3)
-let others = ["A","B","C","D"].enumerated().map {
-   Arrow([$0.1,"E","z" + "\($0.0)"])
-}
-
-let arrows = abcdArrows + others
-
-display(matrix:matrix, matrixsize:maxsize, arrows:arrows)
 
 ```
 
 # Output
 ```latex
 \xymatrix{
-A \ar[r]^{f} \ar[rrrddd]^{z0}  & B \ar[r]^{g} \ar[rrddd]^{z1}  & C \ar[r]^{h} \ar[rddd]^{z2}  & D \ar[ddd]^{z3}  \\
-&    &    &    \\
-&    &    &    \\
-&    &    & E
+a \ar[r]_{f}^{} \ar[d]_{h}^{}  & b \ar[d]_{g}^{}  \\
+c \ar[r]_{k}^{}  & d
 }
 ```
-
